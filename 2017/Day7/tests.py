@@ -1,5 +1,6 @@
 import unittest
 import part1
+import part2
 
 class TestDay7(unittest.TestCase):
 
@@ -44,6 +45,39 @@ class TestDay7(unittest.TestCase):
           "cntj (57)"]
 
     self.assertEqual( part1.get_answer(data), "tknk" )
+
+  def test_part_2(self):
+    self.assertEqual( part2.get_weight("a (1) -> b, d"), 1 )
+    self.assertEqual( part2.get_weight("a (445)"), 445 )
+
+    data=["pbga (66)",
+          "xhth (57)",
+          "ebii (61)",
+          "havc (66)",
+          "ktlj (57)",
+          "fwft (72) -> ktlj, cntj, xhth",
+          "qoyq (66)",
+          "padx (45) -> pbga, havc, qoyq",
+          "tknk (41) -> ugml, padx, fwft",
+          "jptl (61)",
+          "ugml (68) -> gyxo, ebii, jptl",
+          "gyxo (61)",
+          "cntj (57)"]
+
+    graph, weights = part2.get_graph_and_weights(data)
+
+    self.assertEqual( weights["gyxo"], 61 )
+    self.assertEqual( graph["gyxo"], [] )
+    self.assertEqual( graph["tknk"], ["ugml", "padx", "fwft"] )
+    self.assertEqual( part2.get_total_weight(graph, weights, "ugml"), 251 )
+    self.assertEqual( part2.get_total_weight(graph, weights, "cntj"), 57 )
+    self.assertEqual( part2.is_balanced(graph, weights, "cntj"), True )
+    self.assertEqual( part2.is_balanced(graph, weights, "ugml"), True )
+    self.assertEqual( part2.is_balanced(graph, weights, "tknk"), False )
+    self.assertEqual( part2.is_balanced(graph, weights, "padx"), True )
+    self.assertEqual( part2.is_balanced(graph, weights, "fwft"), True )
+    self.assertEqual( part2.is_balanced(graph, weights, "ktlj"), True )
+    self.assertEqual( part2.get_answer(data), 60 )
 
 
 if __name__ == '__main__':
