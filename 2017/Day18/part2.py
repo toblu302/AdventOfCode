@@ -21,9 +21,6 @@ class Machine:
     self.snd_count = 0
     self.PC = 0
 
-  def print_state(self):
-    print("Queue:", self.queue)
-
   def get_value_of(self, x):
     if RepresentsInt(x):
       return int(x)
@@ -33,28 +30,22 @@ class Machine:
     self.other_machine = other
 
   def i_snd(self, x):
-    print("SND", x, "   (", self.get_value_of(x), ")")
     self.other_machine.queue.append( self.get_value_of(x) )
     self.snd_count += 1
 
   def i_set(self, x, y):
-    print("SET", x, y, "   (", self.get_value_of(x), self.get_value_of(y), ")")
     self.registers[x] = self.get_value_of(y)
 
   def i_add(self, x, y):
-    print("ADD", x, y, "   (", self.get_value_of(x), self.get_value_of(y), ")")
     self.registers[x] += self.get_value_of(y)
 
   def i_mul(self, x, y):
-    print("MUL", x, y, "   (", self.get_value_of(x), self.get_value_of(y), ")")
     self.registers[x] *= self.get_value_of(y)
 
   def i_mod(self, x, y):
-    print("MOD", x, y, "   (", self.get_value_of(x), self.get_value_of(y), ")")
     self.registers[x] %= self.get_value_of(y)
 
   def i_rcv(self, x):
-    print("RCV", x, "   (", self.get_value_of(x), ". len(queue)=", len(self.queue), ")")
     if len(self.queue) > 0:
       self.registers[x] = self.queue[0]
       del self.queue[0]
@@ -63,14 +54,12 @@ class Machine:
       self.waiting = True
 
   def i_jgz(self, x, y):
-    print("JGZ", x, y, "   (", self.get_value_of(x), self.get_value_of(y), ")")
     if self.get_value_of(x) > 0:
       self.PC += (self.get_value_of(y)-1)
       
 
   def fetch_and_execute(self):
     if self.terminated:
-      print("TERMINATED")
       return False
     self.waiting = False
 
@@ -113,10 +102,7 @@ def get_answer(program):
   machine2.set_reciever(machine1)
 
   while not machine1.terminated:
-    print("machine1:  ",end="")
     machine1.fetch_and_execute()
-
-    print("machine2:  ",end="")
     machine2.fetch_and_execute()
 
   return machine2.snd_count

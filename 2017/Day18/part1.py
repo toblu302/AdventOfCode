@@ -27,33 +27,26 @@ class Machine:
     return self.registers[x]
 
   def i_snd(self, x):
-    print("SND", x, "   (", self.get_value_of(x), ")")
     self.last_sound = self.get_value_of(x)
 
   def i_set(self, x, y):
-    print("SET", x, y, "   (", self.get_value_of(x), self.get_value_of(y), ")")
     self.registers[x] = self.get_value_of(y)
 
   def i_add(self, x, y):
-    print("ADD", x, y, "   (", self.get_value_of(x), self.get_value_of(y), ")")
     self.registers[x] += self.get_value_of(y)
 
   def i_mul(self, x, y):
-    print("MUL", x, y, "   (", self.get_value_of(x), self.get_value_of(y), ")")
     self.registers[x] *= self.get_value_of(y)
 
   def i_mod(self, x, y):
-    print("MOD", x, y, "   (", self.get_value_of(x), self.get_value_of(y), ")")
     self.registers[x] %= self.get_value_of(y)
 
   def i_rcv(self, x):
-    print("RCV", x, "   (", self.get_value_of(x), ")")
     if self.get_value_of(x) != 0:
       self.recovered = self.last_sound
     return self.recovered
 
   def i_jgz(self, x, y):
-    print("JGZ", x, y, "   (", self.get_value_of(x), self.get_value_of(y), ")")
     if self.get_value_of(x) > 0:
       self.PC += (self.get_value_of(y)-1)
       
