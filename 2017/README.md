@@ -25,4 +25,4 @@ Each day has its own folder, with the solutions for part 1 and 2 placed in the f
 * Day18	Part1: 0m0.027s Part2: 0m0.547s
 * Day19	Part1: 0m0.041s Part2: 0m0.040s
 * Day20	Part1: 0m0.088s Part2: 0m5.236s
-* Day21	Part2: 0m0.032s Part2: 0m6.758s
+* Day21	Part1: 0m0.032s Part2: 0m6.758s
