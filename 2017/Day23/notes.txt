@@ -1,0 +1,170 @@
+## Original input
+set b 99
+set c b
+jnz a 2
+jnz 1 5
+mul b 100
+sub b -100000
+set c b
+sub c -17000
+set f 1
+set d 2
+set e 2
+set g d
+mul g e
+sub g b
+jnz g 2
+set f 0
+sub e -1
+set g e
+sub g b
+jnz g -8
+sub d -1
+set g d
+sub g b
+jnz g -13
+jnz f 2
+sub h -1
+set g b
+sub g c
+jnz g 2
+jnz 1 3
+sub b -17
+jnz 1 -23
+
+
+## Commented input
+1: set b 99      b = 99
+2: set c b       c = b
+3: jnz a 2       if(a != 0) GOTO 5
+4: jnz 1 5       GOTO 9
+5: mul b 100     b *= 100
+6: sub b -100000 b += 100000
+7: set c b       c = b
+8: sub c -17000  c += 17000
+9: set f 1       f = 1
+10: set d 2      d = 2
+11: set e 2      e = 2
+12: set g d      g = d
+13: mul g e      g *= e
+14: sub g b      g -= b
+15: jnz g 2      if( g!= 0 ) GOTO 17
+16: set f 0      f = 0
+17: sub e -1     e += 1
+18: set g e      g = e
+19: sub g b      g -= b
+20: jnz g -8     if( g!= 0 ) GOTO 12
+21: sub d -1     d += 1
+22: set g d      g = d
+23: sub g b      g -= b
+24: jnz g -13    if( g != 0) GOTO 11
+25: jnz f 2      if( f != 0) GOTO 27
+26: sub h -1     h += 1
+27: set g b      g = b
+28: sub g c      g -= c
+29: jnz g 2      if( g != 0) GOTO 31
+30: jnz 1 3      GOTO END
+31: sub b -17    b += 17
+32: jnz 1 -23    GOTO 9
+
+
+## Changed input
+a = 1
+1: set b 99      b = 99*100 + 100000
+2: set c b       c = b+17000
+3: NOP
+4: NOP
+5: NOP
+6: NOP
+7: NOP
+8: NOP
+9: set f 1       f = 1
+10: set d 2      d = 2
+11: set e 2      e = 2
+12: NOP
+13: NOP
+14: NOP
+15: jnz g 2      if( d*e != b ) GOTO 17
+16: set f 0      f = 0
+17: sub e -1     e += 1
+18: NOP
+19: NOP
+20: jnz g -8     if( e != b ) GOTO 12
+21: sub d -1     d += 1
+22: NOP
+23: NOP
+24: jnz g -13    if( d != b) GOTO 11
+25: jnz f 2      if( f != 0) GOTO 27
+26: sub h -1     h += 1
+27: NOP
+28: NOP
+29: jnz g 2      if( b != c) GOTO 31
+30: jnz 1 3      GOTO FINISHED
+31: sub b -17    b += 17
+32: jnz 1 -23    GOTO 9
+
+
+## Rewritten input
+a = 1
+b = 99*100 + 100000
+c = b+17000
+
+while( b != c) {
+  f = 1
+  d = 2
+
+  while( d != b ) {
+    e = 2
+    while( e != b ) {
+      if( d*e == b ) {
+        f = 0
+      }
+      e += 1
+    }
+    d += 1
+  }
+
+  if( f == 0 )
+  {
+    h += 1
+  }
+
+
+  b += 17
+}
+
+## Python version of the input
+b = 99*100 + 100000
+c = b+17000
+while b != c:
+  f = 1
+  d = 2
+  while d != b:
+    e = 2
+    while e != b:
+      if d*e == b:
+        f = 0
+      e += 1
+    d += 1
+
+  if f == 0
+    h += 1
+  
+  b += 17
+
+
+## Faster version of the Python-code
+def isPrime(num):
+  if num%2 == 0:
+    return True
+  for i in range(3, num, 2):
+    if num%i == 0:
+      return True
+  return False
+
+answer = 0
+for c in range(99*100+100000, 99*100+117000, 17):
+  if isPrime(c):
+    answer += 1
+
+print(answer)
