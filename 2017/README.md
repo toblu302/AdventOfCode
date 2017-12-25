@@ -29,3 +29,4 @@ Each day has its own folder, with the solutions for part 1 and 2 placed in the f
 * Day22	Part1: 0m1.828s Part2: 0m13.372s
 * Day23	Part1: 0m0.354s Part2: 0m0.941s
 * Day24 Part1: 0m2.351s Part2: 0m2.590s
+* Day25	Part1: 0m18.618s
