@@ -8,4 +8,4 @@ All of the solutions are written in Python 3.
 X86-64, with a little help from the C standard library.
 
 ## 2019
-A mix of languages (Brainfuck, C++, Python).
+A mix of languages (Brainfuck, C++, Python, Bash).
